@@ -21,7 +21,9 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext = getApplicationContext();
         Logger.addLogAdapter(new AndroidLogAdapter());
+
         Realm.init(this);
+
         Stetho.initialize(//Stetho初始化
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))

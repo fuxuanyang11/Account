@@ -3,7 +3,7 @@ package com.example.account.task;
 
 import com.example.account.BasePresenter;
 import com.example.account.BaseView;
-import com.example.account.data.CeramicsInfo;
+import com.example.account.data.CeramicsInfos;
 
 import java.util.List;
 
@@ -17,9 +17,11 @@ public interface TaskContract {
 
         void setLoadingIndicator(boolean active);
 
-        void showTasks(List<CeramicsInfo> tasks);
+        void showTasks(List<CeramicsInfos> tasks);
 
         void showNoTasks();
+
+        void showAddTask();
     }
 
 

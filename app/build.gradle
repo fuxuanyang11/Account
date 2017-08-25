@@ -41,4 +41,5 @@ dependencies {
     compile rootProject.ext.libLog
     compile rootProject.ext.libButterKnife
     annotationProcessor rootProject.ext.libButterKnifeCompiler
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }

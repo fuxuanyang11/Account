@@ -1,7 +1,7 @@
 package com.example.account.task;
 
 
-import com.example.account.data.CeramicsInfo;
+import com.example.account.data.CeramicsInfos;
 import com.example.account.util.RealmUtils;
 
 import java.util.List;
@@ -32,7 +32,7 @@ public class TaskPresent implements TaskContract.Presenter {
 
     @Override
     public void addNewTask() {
-
+        mTaskView.showAddTask();
     }
 
     private void loadTask(boolean showLoadingUI) {
@@ -40,14 +40,14 @@ public class TaskPresent implements TaskContract.Presenter {
             mTaskView.setLoadingIndicator(true);
         }
 
-        List<CeramicsInfo> ceramicsInfos = (List<CeramicsInfo>) RealmUtils.queryRealmObjects(CeramicsInfo.class);
+        List<CeramicsInfos> ceramicsInfos = (List<CeramicsInfos>) RealmUtils.queryRealmObjects(CeramicsInfos.class);
         processTasks(ceramicsInfos);
         if (showLoadingUI) {
             mTaskView.setLoadingIndicator(false);
         }
     }
 
-    private void processTasks(List<CeramicsInfo> tasks) {
+    private void processTasks(List<CeramicsInfos> tasks) {
         if (tasks.isEmpty()) {
             mTaskView.showNoTasks();
         } else {

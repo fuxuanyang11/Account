@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="项目"
+                android:textSize="16sp"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
+                <EditText
+                    android:id="@+id/item_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dp_10"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_done"
+        app:backgroundTint="@color/colorAccent"
+        app:fabSize="normal"/>
+</RelativeLayout>

@@ -1,13 +1,16 @@
 package com.example.account.data;
 
+import android.text.TextUtils;
+
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 @RealmClass
-public class CeramicsInfo extends RealmObject {
+public class CeramicsInfos extends RealmObject {
 
-//    @PrimaryKey
-//    private int id;
+    @PrimaryKey
+    private int id;
 
     private String number;
 
@@ -25,25 +28,16 @@ public class CeramicsInfo extends RealmObject {
 
     private String remark;
 
-//    public CeramicsInfo(Builder builder) {
-////        this.id = builder.id;
-//        this.number = builder.number;
-//        this.date = builder.date;
-//        this.specification = builder.specification;
-//        this.amount = builder.amount;
-//        this.price = builder.price;
-//        this.total = builder.total;
-//        this.balance = builder.balance;
-//        this.remark = builder.remark;
-//    }
+    public CeramicsInfos() {
+    }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNumber() {
         return number;
@@ -107,6 +101,14 @@ public class CeramicsInfo extends RealmObject {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+
+    public boolean isEmpty() {
+        return TextUtils.isEmpty(number) &&
+                TextUtils.isEmpty(number) &&
+                TextUtils.isEmpty(specification) &&
+                amount == 0 && price == 0;
     }
 
 }
