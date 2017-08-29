@@ -12,19 +12,11 @@
         android:text="项目"
         android:textSize="16sp"/>
 
-    <RelativeLayout
+    <EditText
+        android:id="@+id/item_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <EditText
-            android:id="@+id/item_content"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:gravity="center_vertical"
-            android:textSize="16sp"/>
-    </RelativeLayout>
+        android:background="@null"
+        android:gravity="center_vertical"
+        android:textSize="16sp"/>
 </LinearLayout>

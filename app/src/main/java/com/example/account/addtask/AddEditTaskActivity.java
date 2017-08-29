@@ -3,6 +3,8 @@ package com.example.account.addtask;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.account.BaseActivity;
 import com.example.account.R;
@@ -16,6 +18,22 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     public static final int REQUEST_ADD_TASK = 1;
     @BindView(R.id.fab_add_task)
     FloatingActionButton mFabAddTask;
+    @BindView(R.id.date_content)
+    TextView mDateContent;
+    @BindView(R.id.number_content)
+    EditText mNumberContent;
+    @BindView(R.id.specification_content)
+    EditText mSpecificationContent;
+    @BindView(R.id.amount_content)
+    EditText mAmountContent;
+    @BindView(R.id.price_content)
+    EditText mPriceContent;
+    @BindView(R.id.total_content)
+    TextView mTotalContent;
+    @BindView(R.id.balance_content)
+    EditText mBalanceContent;
+    @BindView(R.id.remark_content)
+    EditText mRemarkContent;
 
     private AddTaskContract.Presenter mPresenter;
 
@@ -96,6 +114,6 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
 
     @OnClick(R.id.fab_add_task)
     public void onViewClicked() {
-//        mPresenter.saveTask();
+        //        mPresenter.saveTask();
     }
 }

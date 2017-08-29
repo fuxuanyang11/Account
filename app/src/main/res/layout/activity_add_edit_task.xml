@@ -9,38 +9,214 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
             android:orientation="horizontal">
+
             <TextView
-                android:id="@+id/item_title"
+                android:id="@+id/date"
                 android:layout_width="@dimen/dp_72"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="项目"
+                android:text="日期"
                 android:textSize="16sp"/>
-            <RelativeLayout
+
+            <TextView
+                android:id="@+id/date_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true">
-                <EditText
-                    android:id="@+id/item_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:gravity="center_vertical"
-                    android:textSize="16sp"/>
-            </RelativeLayout>
+                android:gravity="center_vertical"
+                android:hint="点此选择日期"
+                android:textColorHint="@color/hintColor"
+                android:textSize="16sp"/>
         </LinearLayout>
+        <View
+            style="@style/line_horizontal"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="编号"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/number_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="输入编号"
+                android:textColorHint="@color/hintColor"
+                android:background="@null"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <View
+            style="@style/line_horizontal"/>
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/specification"
+            android:layout_width="@dimen/dp_72"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="规格"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/specification_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:hint="输入规格"
+            android:textColorHint="@color/hintColor"
+            android:background="@null"
+            android:textSize="16sp"/>
     </LinearLayout>
+        <View
+            style="@style/line_horizontal"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="数量"
+                android:textSize="16sp"/>
 
+            <EditText
+                android:id="@+id/amount_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="输入数量"
+                android:textColorHint="@color/hintColor"
+                android:background="@null"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <View
+            style="@style/line_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="价格"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/price_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="输入价格"
+                android:textColorHint="@color/hintColor"
+                android:background="@null"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <View
+            style="@style/line_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="合计"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/total_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:background="@null"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <View
+            style="@style/line_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="余额"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/balance_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:hint="选择是否输入余额"
+                android:textColorHint="@color/hintColor"
+                android:background="@null"
+                android:textSize="16sp"/>
+        </LinearLayout>
+        <View
+            style="@style/line_horizontal"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/remark"
+                android:layout_width="@dimen/dp_72"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="备注"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:layout_toRightOf="@id/remark"
+                android:id="@+id/remark_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/dp_10"
+                android:hint="填写备注"
+                android:textColorHint="@color/hintColor"
+                android:background="@null"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+    </LinearLayout>
 
 
     <android.support.design.widget.FloatingActionButton
