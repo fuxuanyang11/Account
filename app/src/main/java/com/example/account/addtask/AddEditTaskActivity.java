@@ -12,6 +12,7 @@ import com.example.account.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.Realm;
 
 public class AddEditTaskActivity extends BaseActivity implements AddTaskContract.View {
 
@@ -37,13 +38,16 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
 
     private AddTaskContract.Presenter mPresenter;
 
+    private Realm mRealm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_task);
         ButterKnife.bind(this);
-
-        mPresenter.onTaskLoaded();
+        mRealm = Realm.getDefaultInstance();
+        mPresenter = new AddTaskPresent(this, mRealm, null);
+//        mPresenter.onTaskLoaded();
     }
 
     @Override
@@ -88,12 +92,12 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     }
 
     @Override
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
 
     }
 
     @Override
-    public void setPrice(float price) {
+    public void setPrice(String price) {
 
     }
 
@@ -109,11 +113,16 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
 
     @Override
     public boolean isActive() {
-        return false;
+        return true;
     }
 
-    @OnClick(R.id.fab_add_task)
+//    @OnClick(R.id.fab_add_task)
+//    public void onViewClicked() {
+//        //        mPresenter.saveTask();
+//    }
+
+    @OnClick(R.id.date)
     public void onViewClicked() {
-        //        mPresenter.saveTask();
+
     }
 }

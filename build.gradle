@@ -53,5 +53,6 @@ project.ext{
     libStetho = "com.facebook.stetho:stetho:1.5.0"
     libStethoRealm = "com.uphyca:stetho_realm:2.1.0"
     libLog = "com.orhanobut:logger:2.1.1"
+    libCalendarview = "com.prolificinteractive:material-calendarview:1.4.3"
 }
 
