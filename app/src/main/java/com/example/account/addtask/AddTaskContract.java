@@ -16,9 +16,11 @@ public class AddTaskContract  {
 
         void setSpecification(String specification);
 
-        void setAmount(int amount);
+        void setAmount(String amount);
 
-        void setPrice(float price);
+        void setPrice(String price);
+
+        void setTotal(String total);
 
         void setBalance(String balance);
 
@@ -28,8 +30,8 @@ public class AddTaskContract  {
     }
 
     interface Presenter extends BasePresenter {
-        void saveTask(String date, String number, String specification, int amount, float price, String balance,
-                      String remark);
+        void saveTask(String date, String number, String specification, String amount, String price,
+                      String total, String balance, String remark);
 
         void onTaskLoaded();
 

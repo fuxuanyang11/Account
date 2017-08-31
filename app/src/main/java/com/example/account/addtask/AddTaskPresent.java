@@ -27,40 +27,47 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
     }
 
     @Override
-    public void saveTask(String date, String number, String specification, int amount,
-                         float price, String balance, String remark) {
+    public void saveTask(String date, String number, String specification, String amount,
+                         String price, String total, String balance, String remark) {
 
         if (isNewTask()) {
-            createTask(date, number, specification, amount, price, balance, remark);
+            createTask(date, number, specification, amount, price, total, balance, remark);
         } else {
-            updateTask(date, number, specification, amount, price, balance, remark);
+            updateTask(date, number, specification, amount, price, total, balance, remark);
         }
 
 
     }
 
-    private void createTask(String date, String number, String specification, int amount,
-                            float price, String balance, String remark) {
-
-        mRealm.executeTransaction(realm -> {
-            CeramicsInfos ceramicsInfos = realm.createObject(CeramicsInfos.class);
-            ceramicsInfos.setDate(date);
-            ceramicsInfos.setNumber(number);
-            ceramicsInfos.setSpecification(specification);
-            ceramicsInfos.setAmount(amount);
-            ceramicsInfos.setPrice(price);
-            ceramicsInfos.setBalance(balance);
-            ceramicsInfos.setRemark(remark);
-            if (ceramicsInfos.isEmpty()) {
-                mAddTaskView.showEmptyTaskError();
-            } else {
-                mAddTaskView.showTasksList();
-            }
-        });
+    private void createTask(String date, String number, String specification, String amount,
+                            String price, String total, String balance, String remark) {
+        CeramicsInfos ceramicsInfos = new CeramicsInfos(number, date, specification, amount, price,
+                total, balance, remark);
+        if (ceramicsInfos.isEmpty()) {
+            mAddTaskView.showEmptyTaskError();
+        }else {
+            mRealm.executeTransaction(realm -> realm.copyToRealm(ceramicsInfos));
+        }
+//        mRealm.executeTransaction(realm -> {
+//            CeramicsInfos ceramicsInfos = realm.createObject(CeramicsInfos.class);
+//            ceramicsInfos.setDate(date);
+//            ceramicsInfos.setNumber(number);
+//            ceramicsInfos.setSpecification(specification);
+//            ceramicsInfos.setAmount(amount);
+//            ceramicsInfos.setPrice(price);
+//            ceramicsInfos.setTotal(total);
+//            ceramicsInfos.setBalance(balance);
+//            ceramicsInfos.setRemark(remark);
+//            if (ceramicsInfos.isEmpty()) {
+//
+//            } else {
+//                mAddTaskView.showTasksList();
+//            }
+//        });
     }
 
-    private void updateTask(String date, String number, String specification, int amount,
-                            float price, String balance, String remark) {
+    private void updateTask(String date, String number, String specification, String amount,
+                            String price, String total, String balance, String remark) {
         CeramicsInfos ceramicsInfos = mRealm.where(CeramicsInfos.class).equalTo("id", mTaskId).findFirst();
         mRealm.beginTransaction();
         ceramicsInfos.setDate(date);
@@ -68,6 +75,7 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
         ceramicsInfos.setSpecification(specification);
         ceramicsInfos.setAmount(amount);
         ceramicsInfos.setPrice(price);
+        ceramicsInfos.setTotal(total);
         ceramicsInfos.setBalance(balance);
         ceramicsInfos.setRemark(remark);
         mRealm.commitTransaction();
@@ -83,6 +91,7 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
             mAddTaskView.setSpecification(ceramicsInfos.getSpecification());
             mAddTaskView.setAmount(ceramicsInfos.getAmount());
             mAddTaskView.setPrice(ceramicsInfos.getPrice());
+            mAddTaskView.setTotal(ceramicsInfos.getTotal());
             mAddTaskView.setBalance(ceramicsInfos.getBalance());
             mAddTaskView.setRemark(ceramicsInfos.getRemark());
         }

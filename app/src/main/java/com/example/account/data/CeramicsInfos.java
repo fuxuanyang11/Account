@@ -3,13 +3,24 @@ package com.example.account.data;
 import android.text.TextUtils;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 @RealmClass
 public class CeramicsInfos extends RealmObject {
 
-    @PrimaryKey
+
+    public CeramicsInfos(String number, String date, String specification, String amount, String price, String total, String balance, String remark) {
+        this.number = number;
+        this.date = date;
+        this.specification = specification;
+        this.amount = amount;
+        this.price = price;
+        this.total = total;
+        this.balance = balance;
+        this.remark = remark;
+    }
+
+    //    @PrimaryKey
     private int id;
 
     private String number;
@@ -18,11 +29,11 @@ public class CeramicsInfos extends RealmObject {
 
     private String specification;
 
-    private int amount;
+    private String amount;
 
-    private float price;
+    private String price;
 
-    private float total;
+    private String total;
 
     private String balance;
 
@@ -63,27 +74,27 @@ public class CeramicsInfos extends RealmObject {
         this.specification = specification;
     }
 
-    public int getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public float getTotal() {
+    public String getTotal() {
         return total;
     }
 
-    public void setTotal(float total) {
+    public void setTotal(String total) {
         this.total = total;
     }
 
@@ -105,10 +116,11 @@ public class CeramicsInfos extends RealmObject {
 
 
     public boolean isEmpty() {
-        return TextUtils.isEmpty(number) &&
+        return TextUtils.isEmpty(date) &&
                 TextUtils.isEmpty(number) &&
                 TextUtils.isEmpty(specification) &&
-                amount == 0 && price == 0;
+                TextUtils.isEmpty(amount) &&
+                TextUtils.isEmpty(price);
     }
 
 }
