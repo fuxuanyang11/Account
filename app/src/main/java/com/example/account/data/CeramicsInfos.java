@@ -116,10 +116,10 @@ public class CeramicsInfos extends RealmObject {
 
 
     public boolean isEmpty() {
-        return TextUtils.isEmpty(date) &&
-                TextUtils.isEmpty(number) &&
-                TextUtils.isEmpty(specification) &&
-                TextUtils.isEmpty(amount) &&
+        return TextUtils.isEmpty(date) ||
+                TextUtils.isEmpty(number) ||
+                TextUtils.isEmpty(specification) ||
+                TextUtils.isEmpty(amount) ||
                 TextUtils.isEmpty(price);
     }
 
