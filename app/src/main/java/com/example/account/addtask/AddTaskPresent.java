@@ -1,6 +1,10 @@
 package com.example.account.addtask;
 
-import com.example.account.data.CeramicsInfos;
+import com.example.account.MyApplication;
+import com.example.account.data.CeramicsInfo;
+import com.orhanobut.logger.Logger;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import io.realm.Realm;
 
@@ -11,6 +15,8 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
     private Realm mRealm;
 
     private String mTaskId;
+
+    private static AtomicInteger mId = new AtomicInteger();
 
     public AddTaskPresent(AddTaskContract.View addTaskView, Realm realm, String taskId) {
         mAddTaskView = addTaskView;
@@ -41,60 +47,48 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
 
     private void createTask(String date, String number, String specification, String amount,
                             String price, String total, String balance, String remark) {
-        CeramicsInfos ceramicsInfos = new CeramicsInfos(number, date, specification, amount, price,
-                total, balance, remark);
-        if (ceramicsInfos.isEmpty()) {
+        String id = String.valueOf(mId.getAndIncrement());
+        CeramicsInfo ceramicsInfo = new CeramicsInfo(id, number, date,
+                specification, amount, price, total, balance, remark);
+
+        if (ceramicsInfo.isEmpty()) {
             mAddTaskView.showEmptyTaskError();
         }else {
-            mRealm.executeTransaction(realm -> realm.copyToRealm(ceramicsInfos));
+            mRealm.executeTransaction(realm -> realm.copyToRealm(ceramicsInfo));
+            mAddTaskView.showTasksList();
         }
-//        mRealm.executeTransaction(realm -> {
-//            CeramicsInfos ceramicsInfos = realm.createObject(CeramicsInfos.class);
-//            ceramicsInfos.setDate(date);
-//            ceramicsInfos.setNumber(number);
-//            ceramicsInfos.setSpecification(specification);
-//            ceramicsInfos.setAmount(amount);
-//            ceramicsInfos.setPrice(price);
-//            ceramicsInfos.setTotal(total);
-//            ceramicsInfos.setBalance(balance);
-//            ceramicsInfos.setRemark(remark);
-//            if (ceramicsInfos.isEmpty()) {
-//
-//            } else {
-//                mAddTaskView.showTasksList();
-//            }
-//        });
+
     }
 
     private void updateTask(String date, String number, String specification, String amount,
                             String price, String total, String balance, String remark) {
-        CeramicsInfos ceramicsInfos = mRealm.where(CeramicsInfos.class).equalTo("id", mTaskId).findFirst();
+        CeramicsInfo ceramicsInfo = mRealm.where(CeramicsInfo.class).equalTo("id", mTaskId).findFirst();
         mRealm.beginTransaction();
-        ceramicsInfos.setDate(date);
-        ceramicsInfos.setNumber(number);
-        ceramicsInfos.setSpecification(specification);
-        ceramicsInfos.setAmount(amount);
-        ceramicsInfos.setPrice(price);
-        ceramicsInfos.setTotal(total);
-        ceramicsInfos.setBalance(balance);
-        ceramicsInfos.setRemark(remark);
+        ceramicsInfo.setDate(date);
+        ceramicsInfo.setNumber(number);
+        ceramicsInfo.setSpecification(specification);
+        ceramicsInfo.setAmount(amount);
+        ceramicsInfo.setPrice(price);
+        ceramicsInfo.setTotal(total);
+        ceramicsInfo.setBalance(balance);
+        ceramicsInfo.setRemark(remark);
         mRealm.commitTransaction();
         mAddTaskView.showTasksList();
     }
 
     @Override
     public void onTaskLoaded() {
-        CeramicsInfos ceramicsInfos = mRealm.where(CeramicsInfos.class).equalTo("id", mTaskId).findFirst();
-        if (mAddTaskView.isActive()) {
-            mAddTaskView.setDate(ceramicsInfos.getDate());
-            mAddTaskView.setNumber(ceramicsInfos.getNumber());
-            mAddTaskView.setSpecification(ceramicsInfos.getSpecification());
-            mAddTaskView.setAmount(ceramicsInfos.getAmount());
-            mAddTaskView.setPrice(ceramicsInfos.getPrice());
-            mAddTaskView.setTotal(ceramicsInfos.getTotal());
-            mAddTaskView.setBalance(ceramicsInfos.getBalance());
-            mAddTaskView.setRemark(ceramicsInfos.getRemark());
-        }
+        CeramicsInfo ceramicsInfo = mRealm.where(CeramicsInfo.class).equalTo("id", mTaskId).findFirst();
+        Logger.d(ceramicsInfo.getDate());
+            mAddTaskView.setDate(ceramicsInfo.getDate());
+            mAddTaskView.setNumber(ceramicsInfo.getNumber());
+            mAddTaskView.setSpecification(ceramicsInfo.getSpecification());
+            mAddTaskView.setAmount(ceramicsInfo.getAmount());
+            mAddTaskView.setPrice(ceramicsInfo.getPrice());
+            mAddTaskView.setTotal(ceramicsInfo.getTotal());
+            mAddTaskView.setBalance(ceramicsInfo.getBalance());
+            mAddTaskView.setRemark(ceramicsInfo.getRemark());
+
 
     }
 

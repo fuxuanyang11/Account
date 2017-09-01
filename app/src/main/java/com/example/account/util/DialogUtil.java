@@ -30,14 +30,14 @@ public class DialogUtil {
         confirm.setOnClickListener(listener);
         widget.setOnDateChangedListener(onDateSelectedListener);
 
-        Calendar cal = Calendar.getInstance();
-        int y = cal.get(Calendar.YEAR);
-        int m = cal.get(Calendar.MONTH);
-        int d = cal.get(Calendar.DATE);
-        widget.setSelectedDate(cal);//设置默认选中日期
-        widget.state().edit()
-                .setMaximumDate(CalendarDay.from(y, m, d))
-                .commit();
+//        Calendar cal = Calendar.getInstance();
+//        int y = cal.get(Calendar.YEAR);
+//        int m = cal.get(Calendar.MONTH);
+//        int d = cal.get(Calendar.DATE);
+//        widget.setSelectedDate(cal);//设置默认选中日期
+//        widget.state().edit()
+//                .setMaximumDate(CalendarDay.from(y, m, d))
+//                .commit();
 
         dialog.setContentView(inflate);
         Window dialogWindow = dialog.getWindow();

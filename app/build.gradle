@@ -39,5 +39,6 @@ dependencies {
     compile rootProject.ext.libLog
     compile rootProject.ext.libCalendarview
     compile rootProject.ext.libButterKnife
+    compile rootProject.ext.libFab
     annotationProcessor rootProject.ext.libButterKnifeCompiler
 }

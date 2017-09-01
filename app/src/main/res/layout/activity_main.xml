@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/parent_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -25,7 +26,7 @@
         android:id="@+id/noTasks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
 
@@ -46,16 +47,30 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
+    <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fab_add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/dp_10"
-        android:src="@drawable/ic_add"
-        android:foregroundGravity="center"
-        app:backgroundTint="@color/colorAccent"
-        app:fabSize="normal"/>
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/dp_10">
 
-</RelativeLayout>
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_custom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_add"
+            app:fab_size="mini"
+            app:fab_label="自定义" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_done"
+            app:fab_size="mini"
+            app:fab_label="普通" />
+
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</android.support.design.widget.CoordinatorLayout>

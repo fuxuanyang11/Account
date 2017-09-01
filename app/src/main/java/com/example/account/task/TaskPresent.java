@@ -1,7 +1,10 @@
 package com.example.account.task;
 
 
-import com.example.account.data.CeramicsInfos;
+import android.app.Activity;
+
+import com.example.account.addtask.AddEditTaskActivity;
+import com.example.account.data.CeramicsInfo;
 import com.example.account.util.RealmUtils;
 
 import java.util.List;
@@ -31,8 +34,20 @@ public class TaskPresent implements TaskContract.Presenter {
     }
 
     @Override
-    public void addNewTask() {
-        mTaskView.showAddTask();
+    public void addNormalTask() {
+        mTaskView.showNormalAddTask();
+    }
+
+    @Override
+    public void addCustomTask() {
+        mTaskView.showCustomAddTask();
+    }
+
+    @Override
+    public void result(int requestCode, int resultCode) {
+        if (AddEditTaskActivity.REQUEST_ADD_TASK == requestCode && Activity.RESULT_OK == resultCode) {
+            mTaskView.showSuccessfullySavedMessage();
+        }
     }
 
     private void loadTask(boolean showLoadingUI) {
@@ -40,14 +55,14 @@ public class TaskPresent implements TaskContract.Presenter {
             mTaskView.setLoadingIndicator(true);
         }
 
-        List<CeramicsInfos> ceramicsInfos = (List<CeramicsInfos>) RealmUtils.queryRealmObjects(CeramicsInfos.class);
+        List<CeramicsInfo> ceramicsInfos = (List<CeramicsInfo>) RealmUtils.queryRealmObjects(CeramicsInfo.class);
         processTasks(ceramicsInfos);
         if (showLoadingUI) {
             mTaskView.setLoadingIndicator(false);
         }
     }
 
-    private void processTasks(List<CeramicsInfos> tasks) {
+    private void processTasks(List<CeramicsInfo> tasks) {
         if (tasks.isEmpty()) {
             mTaskView.showNoTasks();
         } else {

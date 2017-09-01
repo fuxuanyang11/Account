@@ -3,6 +3,7 @@ package com.example.account.addtask;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.account.BaseActivity;
 import com.example.account.R;
+import com.example.account.data.CeramicsInfo;
 import com.example.account.util.DialogUtil;
 import com.example.account.util.ITextWatcher;
 import com.orhanobut.logger.Logger;
@@ -31,6 +33,7 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
 
     public static final int REQUEST_ADD_TASK = 1;
+    public static final String EXTRA_TASK_ID = "EXTRA_TASK_ID";
     @BindView(R.id.fab_add_task)
     FloatingActionButton mFabAddTask;
     @BindView(R.id.date_content)
@@ -50,7 +53,7 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     @BindView(R.id.remark_content)
     EditText mRemarkContent;
     @BindView(R.id.parent_layout)
-    RelativeLayout mRootLayout;
+    CoordinatorLayout mRootLayout;
     private AddTaskContract.Presenter mPresenter;
 
     private Realm mRealm;
@@ -60,14 +63,23 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     private String mSelectedDate;
     private Dialog mDialog;
 
+    private String mTaskId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_edit_task);
         ButterKnife.bind(this);
+
+        initData();
+
+    }
+
+    private void initData() {
+        mTaskId = getIntent().getStringExtra(EXTRA_TASK_ID);
         mRealm = Realm.getDefaultInstance();
-        mPresenter = new AddTaskPresent(this, mRealm, null);
-        mDateContent.setText(mSelectedDate);
+        mPresenter = new AddTaskPresent(this, mRealm, mTaskId);
+        mPresenter.start();
         textWatch();
 
     }
@@ -126,48 +138,44 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
 
     @Override
     public void setDate(String date) {
-
+        mDateContent.setText(date);
     }
 
     @Override
     public void setNumber(String number) {
-
+        mNumberContent.setText(number);
     }
 
     @Override
     public void setSpecification(String specification) {
-
+        mSpecificationContent.setText(specification);
     }
 
     @Override
     public void setAmount(String amount) {
-
+        mAmountContent.setText(amount);
     }
 
     @Override
     public void setPrice(String price) {
-
+        mPriceContent.setText(price);
     }
 
     @Override
     public void setTotal(String total) {
-
+        mTotalContent.setText(total);
     }
 
     @Override
     public void setBalance(String balance) {
-
+        mBalanceContent.setText(balance);
     }
 
     @Override
     public void setRemark(String remark) {
-
+        mRemarkContent.setText(remark);
     }
 
-    @Override
-    public boolean isActive() {
-        return true;
-    }
 
 
     @OnClick({R.id.date, R.id.fab_add_task})
@@ -177,10 +185,6 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
                 setDate();
                 break;
             case R.id.fab_add_task:
-                Logger.d(mDateContent.getText().toString() + mNumberContent.getText().toString()+
-                        mSpecificationContent.getText().toString()+ mAmountContent.getText().toString()+
-                        mPriceContent.getText().toString()+ mTotalContent.getText().toString()+
-                        mBalanceContent.getText().toString()+ mRemarkContent.getText().toString());
                 mPresenter.saveTask(mDateContent.getText().toString(), mNumberContent.getText().toString(),
                         mSpecificationContent.getText().toString(), mAmountContent.getText().toString(),
                         mPriceContent.getText().toString(), mTotalContent.getText().toString(),
@@ -204,9 +208,7 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
                 },
                 (widget, date, selected) -> {
                     mSelectedDate = FORMATTER.format(date.getDate());
-                    if (mSelectedDate == null) {
-                        mSelectedDate = FORMATTER.format(Calendar.getInstance().getTime());
-                    }
+                    mDateContent.setText(mSelectedDate);
                 });
     }
 }

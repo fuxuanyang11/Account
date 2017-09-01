@@ -2,14 +2,18 @@ package com.example.account.data;
 
 import android.text.TextUtils;
 
+import java.io.Serializable;
+
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.RealmClass;
 
 @RealmClass
-public class CeramicsInfos extends RealmObject {
+public class CeramicsInfo extends RealmObject implements Serializable{
 
 
-    public CeramicsInfos(String number, String date, String specification, String amount, String price, String total, String balance, String remark) {
+    public CeramicsInfo(String id, String number, String date, String specification, String amount, String price, String total, String balance, String remark) {
+        this.id = id;
         this.number = number;
         this.date = date;
         this.specification = specification;
@@ -20,8 +24,8 @@ public class CeramicsInfos extends RealmObject {
         this.remark = remark;
     }
 
-    //    @PrimaryKey
-    private int id;
+    @PrimaryKey
+    private String id;
 
     private String number;
 
@@ -39,14 +43,14 @@ public class CeramicsInfos extends RealmObject {
 
     private String remark;
 
-    public CeramicsInfos() {
+    public CeramicsInfo() {
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

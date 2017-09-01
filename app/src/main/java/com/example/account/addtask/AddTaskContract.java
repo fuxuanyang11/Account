@@ -26,7 +26,6 @@ public class AddTaskContract  {
 
         void setRemark(String remark);
 
-        boolean isActive();
     }
 
     interface Presenter extends BasePresenter {
