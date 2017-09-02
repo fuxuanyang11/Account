@@ -2,23 +2,21 @@ package com.example.account.task;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.account.BaseActivity;
 import com.example.account.R;
+import com.example.account.addcustom.AddCustomTaskActivity;
 import com.example.account.addtask.AddEditTaskActivity;
-import com.example.account.data.CeramicsInfo;
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.List;
@@ -96,16 +94,21 @@ public class TaskActivity extends BaseActivity implements TaskContract.View {
 
 
     @Override
-    public void showTasks(List<CeramicsInfo> tasks) {
+    public void showTasks(List<Recipe> tasks) {
         mRecyclerView.setVisibility(View.VISIBLE);
         mNoTasks.setVisibility(View.GONE);
-        TaskAdapter taskAdapter = new TaskAdapter(tasks);
+        TaskAdapter taskAdapter = new TaskAdapter(this, tasks);
         mRecyclerView.setAdapter(taskAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        taskAdapter.setOnItemClickListener((adapter, view, position) -> {
-            showTaskDetailsUi(tasks.get(position).getId());
+        taskAdapter.setOnItemClickListener((view, parentPosition, childPosition) -> {
+            if (TextUtils.isEmpty(tasks.get(parentPosition).getChildList().get(childPosition).getDeduct())) {
+                showTaskDetailsUi(tasks.get(parentPosition).getChildList().get(childPosition).getId());
+            }else {
+                showCustomTaskDetailsUi(tasks.get(parentPosition).getChildList().get(childPosition).getId());
+            }
         });
+
     }
 
     @Override
@@ -122,7 +125,8 @@ public class TaskActivity extends BaseActivity implements TaskContract.View {
 
     @Override
     public void showCustomAddTask() {
-
+        Intent intent = new Intent(this, AddCustomTaskActivity.class);
+        startActivityForResult(intent, AddCustomTaskActivity.REQUEST_CUSTOM_TASK);
     }
 
     @Override
@@ -137,33 +141,27 @@ public class TaskActivity extends BaseActivity implements TaskContract.View {
         startActivity(intent);
     }
 
+    @Override
+    public void showCustomTaskDetailsUi(String taskId) {
+        Intent intent = new Intent(this, AddCustomTaskActivity.class);
+        intent.putExtra(AddCustomTaskActivity.EXTRA_TASK_ID, taskId);
+        startActivity(intent);
+    }
+
     @OnClick({R.id.menu_custom, R.id.menu_normal, R.id.fab_add_task})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.menu_custom:
+                mPresenter.addCustomTask();
+                mFabAddTask.close(true);
                 break;
             case R.id.menu_normal:
                 mPresenter.addNormalTask();
+                mFabAddTask.close(true);
                 break;
             case R.id.fab_add_task:
                 mFabAddTask.toggleMenu(true);
                 break;
-        }
-    }
-
-
-    private static class TaskAdapter extends BaseQuickAdapter<CeramicsInfo, BaseViewHolder> {
-
-
-        public TaskAdapter(@Nullable List<CeramicsInfo> data) {
-            super(R.layout.task_item, data);
-        }
-
-        @Override
-        protected void convert(BaseViewHolder helper, CeramicsInfo item) {
-            helper.setText(R.id.date, item.getDate())
-                    .setText(R.id.number, item.getNumber())
-                    .setText(R.id.total, item.getTotal());
         }
     }
 }
