@@ -1,4 +1,4 @@
-package com.example.account.addtask;
+package com.example.account.addcustom;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -24,20 +24,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 
-public class AddEditTaskActivity extends BaseActivity implements AddTaskContract.View {
+public class AddCustomTaskActivity extends BaseActivity implements CustomTaskContract.View {
 
     private static final DateFormat FORMATTER = SimpleDateFormat.getDateInstance();
 
-    public static final int REQUEST_ADD_TASK = 1;
+    public static final int REQUEST_CUSTOM_TASK = 1;
     public static final String EXTRA_TASK_ID = "EXTRA_TASK_ID";
     @BindView(R.id.fab_add_task)
     FloatingActionButton mFabAddTask;
-    @BindView(R.id.date_content)
-    TextView mDateContent;
-    @BindView(R.id.number_content)
-    EditText mNumberContent;
-    @BindView(R.id.specification_content)
-    EditText mSpecificationContent;
     @BindView(R.id.amount_content)
     EditText mAmountContent;
     @BindView(R.id.price_content)
@@ -50,7 +44,11 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     EditText mRemarkContent;
     @BindView(R.id.parent_layout)
     CoordinatorLayout mRootLayout;
-    private AddTaskContract.Presenter mPresenter;
+    @BindView(R.id.date_content)
+    TextView mDateContent;
+    @BindView(R.id.deduct)
+    EditText mDeduct;
+    private CustomTaskContract.Presenter mPresenter;
 
     private Realm mRealm;
     private Integer mAmount = 0;
@@ -64,9 +62,9 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_edit_task);
+        setContentView(R.layout.activity_add_custom_task);
         ButterKnife.bind(this);
-        getTitleView().setText("添加瓷砖信息");
+        getTitleView().setText("添加活动扣点");
         initData();
 
     }
@@ -91,7 +89,7 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     private void initData() {
         mTaskId = getIntent().getStringExtra(EXTRA_TASK_ID);
         mRealm = Realm.getDefaultInstance();
-        mPresenter = new AddTaskPresent(this, mRealm, mTaskId);
+        mPresenter = new CustomTaskPresent(this, mRealm, mTaskId);
         mPresenter.start();
         textWatch();
 
@@ -134,7 +132,7 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     }
 
     @Override
-    public void setPresenter(AddTaskContract.Presenter presenter) {
+    public void setPresenter(CustomTaskContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -155,14 +153,10 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     }
 
     @Override
-    public void setNumber(String number) {
-        mNumberContent.setText(number);
+    public void setDeduct(String deduct) {
+        mDeduct.setText(deduct);
     }
 
-    @Override
-    public void setSpecification(String specification) {
-        mSpecificationContent.setText(specification);
-    }
 
     @Override
     public void setAmount(String amount) {
@@ -190,7 +184,6 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
     }
 
 
-
     @OnClick({R.id.date, R.id.fab_add_task})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -198,10 +191,10 @@ public class AddEditTaskActivity extends BaseActivity implements AddTaskContract
                 setDate();
                 break;
             case R.id.fab_add_task:
-                mPresenter.saveTask(mDateContent.getText().toString(), mNumberContent.getText().toString(),
-                        mSpecificationContent.getText().toString(), mAmountContent.getText().toString(),
-                        mPriceContent.getText().toString(), mTotalContent.getText().toString(),
-                        mBalanceContent.getText().toString(), mRemarkContent.getText().toString());
+                mPresenter.saveTask(mDateContent.getText().toString(), mDeduct.getText().toString(),
+                        mAmountContent.getText().toString(), mPriceContent.getText().toString(),
+                        "-" + mTotalContent.getText().toString(), mBalanceContent.getText().toString(),
+                        mRemarkContent.getText().toString());
                 break;
         }
     }

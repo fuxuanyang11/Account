@@ -24,6 +24,17 @@ public class CeramicsInfo extends RealmObject implements Serializable{
         this.remark = remark;
     }
 
+    public CeramicsInfo(String id, String date, String amount, String price, String total, String balance, String remark, String deduct) {
+        this.id = id;
+        this.date = date;
+        this.amount = amount;
+        this.price = price;
+        this.total = total;
+        this.balance = balance;
+        this.remark = remark;
+        this.deduct = deduct;
+    }
+
     @PrimaryKey
     private String id;
 
@@ -42,6 +53,16 @@ public class CeramicsInfo extends RealmObject implements Serializable{
     private String balance;
 
     private String remark;
+
+    private String deduct;
+
+    public String getDeduct() {
+        return deduct;
+    }
+
+    public void setDeduct(String deduct) {
+        this.deduct = deduct;
+    }
 
     public CeramicsInfo() {
     }
@@ -123,6 +144,13 @@ public class CeramicsInfo extends RealmObject implements Serializable{
         return TextUtils.isEmpty(date) ||
                 TextUtils.isEmpty(number) ||
                 TextUtils.isEmpty(specification) ||
+                TextUtils.isEmpty(amount) ||
+                TextUtils.isEmpty(price);
+    }
+
+    public boolean isCustomEmpty() {
+        return TextUtils.isEmpty(date) ||
+                TextUtils.isEmpty(deduct) ||
                 TextUtils.isEmpty(amount) ||
                 TextUtils.isEmpty(price);
     }

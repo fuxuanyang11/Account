@@ -1,22 +1,20 @@
-package com.example.account.addtask;
+package com.example.account.addcustom;
 
 import com.example.account.data.CeramicsInfo;
-import com.orhanobut.logger.Logger;
 
 import java.util.UUID;
 
 import io.realm.Realm;
 
-public class AddTaskPresent implements AddTaskContract.Presenter {
+public class CustomTaskPresent implements CustomTaskContract.Presenter {
 
-    private AddTaskContract.View mAddTaskView;
+    private CustomTaskContract.View mAddTaskView;
 
     private Realm mRealm;
 
     private String mTaskId;
 
-
-    public AddTaskPresent(AddTaskContract.View addTaskView, Realm realm, String taskId) {
+    public CustomTaskPresent(CustomTaskContract.View addTaskView, Realm realm, String taskId) {
         mAddTaskView = addTaskView;
         mRealm = realm;
         mTaskId = taskId;
@@ -31,26 +29,24 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
     }
 
     @Override
-    public void saveTask(String date, String number, String specification, String amount,
+    public void saveTask(String date, String deduct, String amount,
                          String price, String total, String balance, String remark) {
 
         if (isNewTask()) {
-            createTask(date, number, specification, amount, price, total, balance, remark);
+            createTask(date, deduct, amount, price, total, balance, remark);
         } else {
-            updateTask(date, number, specification, amount, price, total, balance, remark);
+            updateTask(date, deduct, amount, price, total, balance, remark);
         }
 
 
     }
 
-    private void createTask(String date, String number, String specification, String amount,
+    private void createTask(String date, String deduct, String amount,
                             String price, String total, String balance, String remark) {
-
         String id = String.valueOf(UUID.randomUUID().toString());
-        CeramicsInfo ceramicsInfo = new CeramicsInfo(id, number, date,
-                specification, amount, price, total, balance, remark);
+        CeramicsInfo ceramicsInfo = new CeramicsInfo(id, date, amount, price, total, balance, remark, deduct);
 
-        if (ceramicsInfo.isEmpty()) {
+        if (ceramicsInfo.isCustomEmpty()) {
             mAddTaskView.showEmptyTaskError();
         }else {
             mRealm.executeTransaction(realm -> realm.copyToRealm(ceramicsInfo));
@@ -59,13 +55,12 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
 
     }
 
-    private void updateTask(String date, String number, String specification, String amount,
+    private void updateTask(String date, String deduct, String amount,
                             String price, String total, String balance, String remark) {
         CeramicsInfo ceramicsInfo = mRealm.where(CeramicsInfo.class).equalTo("id", mTaskId).findFirst();
         mRealm.beginTransaction();
         ceramicsInfo.setDate(date);
-        ceramicsInfo.setNumber(number);
-        ceramicsInfo.setSpecification(specification);
+        ceramicsInfo.setDeduct(deduct);
         ceramicsInfo.setAmount(amount);
         ceramicsInfo.setPrice(price);
         ceramicsInfo.setTotal(total);
@@ -78,10 +73,8 @@ public class AddTaskPresent implements AddTaskContract.Presenter {
     @Override
     public void onTaskLoaded() {
         CeramicsInfo ceramicsInfo = mRealm.where(CeramicsInfo.class).equalTo("id", mTaskId).findFirst();
-        Logger.d(ceramicsInfo.getDate());
             mAddTaskView.setDate(ceramicsInfo.getDate());
-            mAddTaskView.setNumber(ceramicsInfo.getNumber());
-            mAddTaskView.setSpecification(ceramicsInfo.getSpecification());
+            mAddTaskView.setDeduct(ceramicsInfo.getDeduct());
             mAddTaskView.setAmount(ceramicsInfo.getAmount());
             mAddTaskView.setPrice(ceramicsInfo.getPrice());
             mAddTaskView.setTotal(ceramicsInfo.getTotal());

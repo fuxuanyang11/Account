@@ -54,5 +54,7 @@ project.ext{
     libStethoRealm = "com.uphyca:stetho_realm:2.1.0"
     libLog = "com.orhanobut:logger:2.1.1"
     libCalendarview = "com.prolificinteractive:material-calendarview:1.4.3"
+    libFab = "com.github.clans:fab:1.6.4"
+    libExpandableRecyclerview = "com.bignerdranch.android:expandablerecyclerview:3.0.0-RC1"
 }
 

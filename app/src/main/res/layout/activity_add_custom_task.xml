@@ -38,31 +38,7 @@
         </LinearLayout>
         <View
             style="@style/line_horizontal"/>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_40"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="@dimen/dp_72"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:text="编号"
-                android:textSize="16sp"/>
-
-            <EditText
-                android:id="@+id/number_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:singleLine="true"
-                android:hint="输入编号"
-                android:textColorHint="@color/hintColor"
-                android:background="@null"
-                android:textSize="16sp"/>
-        </LinearLayout>
-        <View
-            style="@style/line_horizontal"/>
         <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
@@ -72,16 +48,16 @@
             android:layout_width="@dimen/dp_72"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="规格"
+            android:text="扣点"
             android:textSize="16sp"/>
 
         <EditText
-            android:id="@+id/specification_content"
+            android:id="@+id/deduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:hint="输入规格"
+            android:hint="输入活动形式"
             android:textColorHint="@color/hintColor"
             android:background="@null"
             android:textSize="16sp"/>

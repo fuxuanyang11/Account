@@ -3,7 +3,6 @@ package com.example.account.task;
 
 import com.example.account.BasePresenter;
 import com.example.account.BaseView;
-import com.example.account.data.CeramicsInfo;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface TaskContract {
 
         void setLoadingIndicator(boolean active);
 
-        void showTasks(List<CeramicsInfo> tasks);
+        void showTasks(List<Recipe> tasks);
 
         void showNoTasks();
 
@@ -28,6 +27,8 @@ public interface TaskContract {
         void showSuccessfullySavedMessage();
 
         void showTaskDetailsUi(String taskId);
+
+        void showCustomTaskDetailsUi(String taskId);
     }
 
 

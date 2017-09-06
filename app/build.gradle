@@ -40,5 +40,6 @@ dependencies {
     compile rootProject.ext.libCalendarview
     compile rootProject.ext.libButterKnife
     compile rootProject.ext.libFab
+    compile rootProject.ext.libExpandableRecyclerview
     annotationProcessor rootProject.ext.libButterKnifeCompiler
 }
