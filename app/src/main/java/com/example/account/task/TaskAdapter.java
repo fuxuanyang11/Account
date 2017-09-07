@@ -57,9 +57,4 @@ public class TaskAdapter extends ExpandableRecyclerAdapter<Recipe, CeramicsInfo,
         childViewHolder.bind(child);
     }
 
-    public void update(List<Recipe> recipes) {
-        getParentList().clear();
-        setParentList(recipes, false);
-        notifyDataSetChanged();
-    }
 }

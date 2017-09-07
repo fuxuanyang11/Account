@@ -10,6 +10,8 @@ public class AddTaskContract  {
 
         void showTasksList();
 
+        void showTaskDelete();
+
         void setDate(String date);
 
         void setNumber(String number);
@@ -33,6 +35,9 @@ public class AddTaskContract  {
                       String total, String balance, String remark);
 
         void onTaskLoaded();
+
+
+        void deleteTask();
 
     }
 }

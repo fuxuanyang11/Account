@@ -84,6 +84,15 @@ public class CustomTaskPresent implements CustomTaskContract.Presenter {
 
     }
 
+    @Override
+    public void deleteTask() {
+        CeramicsInfo ceramicsInfo = mRealm.where(CeramicsInfo.class).equalTo("id", mTaskId).findFirst();
+        mRealm.executeTransaction(realm -> {
+            ceramicsInfo.deleteFromRealm();
+        });
+        mAddTaskView.showTaskDelete();
+    }
+
 
     private boolean isNewTask() {
         return mTaskId == null;

@@ -10,6 +10,8 @@ public class CustomTaskContract {
 
         void showTasksList();
 
+        void showTaskDelete();
+
         void setDate(String date);
 
         void setDeduct(String deduct);
@@ -31,6 +33,8 @@ public class CustomTaskContract {
                       String price, String total, String balance, String remark);
 
         void onTaskLoaded();
+
+        void deleteTask();
 
     }
 }

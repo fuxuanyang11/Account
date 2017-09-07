@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
+    android:theme="@style/ToolbarTheme"
     android:background="@color/colorPrimary">
     <TextView
         android:id="@+id/title"

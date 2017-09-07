@@ -7,6 +7,8 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -69,22 +71,25 @@ public class AddCustomTaskActivity extends BaseActivity implements CustomTaskCon
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.text_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menu_delete:
-//                CeramicsInfo ceramicsInfo=mRealm.where(CeramicsInfo.class).equalTo("id",mTaskId).findFirst();
-//                ceramicsInfo.deleteFromRealm();
-//                break;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (mTaskId !=null) {
+            getMenuInflater().inflate(R.menu.text_menu, menu);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_delete:
+                mPresenter.deleteTask();
+                return true;
+        }
+        return false;
+    }
 
     private void initData() {
         mTaskId = getIntent().getStringExtra(EXTRA_TASK_ID);
@@ -96,6 +101,10 @@ public class AddCustomTaskActivity extends BaseActivity implements CustomTaskCon
     }
 
     private void textWatch() {
+        if (mTaskId != null) {
+            mPrice = Float.valueOf(mPriceContent.getText().toString());
+            mAmount = Integer.valueOf(mAmountContent.getText().toString());
+        }
         mAmountContent.addTextChangedListener(new ITextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -104,7 +113,7 @@ public class AddCustomTaskActivity extends BaseActivity implements CustomTaskCon
                 } else {
                     mAmount = 0;
                 }
-                mTotalContent.setText(String.valueOf(mPrice * mAmount));
+                mTotalContent.setText(String.valueOf( (float)(Math.round(mPrice * mAmount *100))/100));
             }
         });
         mPriceContent.addTextChangedListener(new ITextWatcher() {
@@ -115,7 +124,7 @@ public class AddCustomTaskActivity extends BaseActivity implements CustomTaskCon
                 } else {
                     mPrice = 0;
                 }
-                mTotalContent.setText(String.valueOf(mPrice * mAmount));
+                mTotalContent.setText(String.valueOf( (float)(Math.round(mPrice * mAmount *100))/100));
             }
         });
     }
@@ -144,6 +153,11 @@ public class AddCustomTaskActivity extends BaseActivity implements CustomTaskCon
     @Override
     public void showTasksList() {
         setResult(Activity.RESULT_OK);
+        finish();
+    }
+
+    @Override
+    public void showTaskDelete() {
         finish();
     }
 

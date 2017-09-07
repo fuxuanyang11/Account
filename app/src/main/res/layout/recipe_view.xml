@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
     <TextView
         android:id="@+id/recipe_textview"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:textSize="20sp"
+        android:layout_marginLeft="@dimen/dp_10"
         android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/dp_10"/>
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/month_total"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentRight="true"
-        android:textSize="18sp"
+        android:layout_marginRight="@dimen/dp_10"
         android:gravity="center_vertical"
         android:textColor="@color/red"
-        android:layout_marginRight="@dimen/dp_10"/>
+        android:textSize="18sp" />
 
     <View
         style="@style/line_horizontal"
         android:layout_alignParentBottom="true"
-        android:background="@color/line"/>
+        android:background="@color/line" />
 </RelativeLayout>
