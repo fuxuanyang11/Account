@@ -33,14 +33,14 @@ public class RecipeViewHolder extends ParentViewHolder {
 
     public void bind(Recipe recipe) {
 
-        mRecipeTextview.setText(recipe.getName().substring(0, 7));
+        mRecipeTextview.setText(recipe.getName());
         List<CeramicsInfo> childList = recipe.getChildList();
         float monthTotal = 0;
         for (CeramicsInfo info : childList) {
             float value = Float.valueOf(info.getTotal());
             monthTotal += value;
         }
-        mMonthTotal.setText(recipe.getName().substring(5, 7) + "总价:" + monthTotal);
+        mMonthTotal.setText(recipe.getName().substring(5, 8) + "总价:" + monthTotal);
     }
 
     @Override

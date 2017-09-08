@@ -17,6 +17,7 @@ import com.example.account.BaseActivity;
 import com.example.account.R;
 import com.example.account.util.DialogUtil;
 import com.example.account.util.ITextWatcher;
+import com.example.account.util.StringUtil;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -227,7 +228,7 @@ public class AddCustomTaskActivity extends BaseActivity implements CustomTaskCon
                     }
                 },
                 (widget, date, selected) -> {
-                    mSelectedDate = FORMATTER.format(date.getDate());
+                    mSelectedDate = StringUtil.formatDateToString(date.getDate());
                     mDateContent.setText(mSelectedDate);
                 });
     }
